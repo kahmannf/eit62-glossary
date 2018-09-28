@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GlossaryBackend.JWT;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -16,6 +17,8 @@ namespace GlossaryBackend.Controllers
         }
 
         // GET api/values/5
+        [JwtAuthenticated]
+        [JwtAuthorization(new [] { "admin" })]
         public string Get(int id)
         {
             return "value";
