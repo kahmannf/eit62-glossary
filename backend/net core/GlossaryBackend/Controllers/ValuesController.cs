@@ -18,7 +18,7 @@ namespace GlossaryBackend.Controllers
 
         // GET api/values/5
         [JwtAuthenticated]
-        [JwtAuthorization(new [] { "admin" })]
+        [JwtAuthorization(new [] { JwtScopes.Admin })]
         public string Get(int id)
         {
             return "value";

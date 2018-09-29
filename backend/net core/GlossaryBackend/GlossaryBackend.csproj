@@ -160,16 +160,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HttpExceptionHelper.cs" />
     <Compile Include="JWT\AddChallengeOnUnauthorizedResult.cs" />
     <Compile Include="JWT\AuthenticationFailureResult.cs" />
     <Compile Include="JWT\AuthorizationAttribute.cs" />
+    <Compile Include="JWT\JwtScopes.cs" />
     <Compile Include="JWT\HttpAuthenticationChallengeContextExtensions.cs" />
     <Compile Include="JWT\JwtAuthenticatedAttribute.cs" />
     <Compile Include="JWT\JwtManager.cs" />
+    <Compile Include="Models\TokenResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -185,7 +189,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

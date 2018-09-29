@@ -8,12 +8,13 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.JsonWebTokens;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace GlossaryBackend.JWT
 {
     public static class JwtManager
     {
-        public static string GenerateToken(ClaimsPrincipal principal, TimeSpan expiresIn, string secret, string algorithm = SecurityAlgorithms.Sha256)
+        public static string GenerateToken(ClaimsPrincipal principal, TimeSpan expiresIn, string secret, string algorithm = SecurityAlgorithms.HmacSha256Signature)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
 
@@ -24,7 +25,7 @@ namespace GlossaryBackend.JWT
                 IssuedAt = DateTime.Now,
                 Expires = DateTime.Now.Add(expiresIn),
                 Subject = tokenIdentity,
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Convert.FromBase64String(secret)), algorithm)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)), algorithm)
             };
 
             JwtSecurityToken token = tokenHandler.CreateJwtSecurityToken(tokenDescriptor);
