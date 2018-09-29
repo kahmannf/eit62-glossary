@@ -48,7 +48,7 @@ namespace GlossaryBackend.JWT
             {
                 foreach(string scope in scopes)
                 {
-                    if (!principal.HasClaim(x => x.Type == ClaimTypes.Role && x.Value == scope))
+                    if (!principal.HasClaim(x => x.Type == "role" && x.Value == scope))
                     {
                         actionContext.Response = GetUnauthorizedResponse(actionContext.Request);
                         return Task.Run(() => actionContext.Response);
