@@ -12,6 +12,18 @@ namespace GlossaryInMemoryBusiness
     {
         private FileHandler<User> _fileHandler = new FileHandler<User>(Path.Combine(Config.GetInstance().DataDirectory ?? throw new MissingConfigException("DataDirectory"), "user"));
 
+        public Task<bool> CheckLoginData(string email, byte[] password)
+        {
+            if(_fileHandler.FirstOrDefault(x => x.Email.ToLower() == email.ToLower()) is User user)
+            {
+                return Task.FromResult(Security.ComparePasswords(password, user.Hash, user.Salt));
+            }
+            else
+            {
+                return Task.FromResult(false);
+            }
+        }
+
         public async Task<bool> CreateUser(string email, string verifyBaseUrl)
         {
             try

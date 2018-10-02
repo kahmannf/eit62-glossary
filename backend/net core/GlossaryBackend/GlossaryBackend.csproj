@@ -161,6 +161,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\EntryController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -192,6 +193,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GlossaryDefinition\GlossaryDefinition.csproj">
+      <Project>{48c6505f-963a-4bec-89c2-729ba3722502}</Project>
+      <Name>GlossaryDefinition</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GlossaryInMemoryBusiness\GlossaryInMemoryBusiness.csproj">
+      <Project>{91daa86e-a954-4995-a3aa-53cb0faadd72}</Project>
+      <Name>GlossaryInMemoryBusiness</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

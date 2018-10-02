@@ -53,7 +53,7 @@ namespace GlossaryInMemoryBusiness
                 lock (threadLock)
                 {
                     store[item.Guid] = item;
-                    DeleteFile(item);
+                    DeleteFile(item.Guid);
                     CreateFile(item);
                 }
             });

@@ -48,5 +48,6 @@ namespace GlossaryDefinition
         /// <param name="email"></param>
         /// <returns></returns>
         Task<bool> ResetPassword(string email);
+        Task<bool> CheckLoginData(string email, byte[] password);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using GlossaryBackend.JWT;
 using GlossaryBackend.Models;
+using GlossaryDefinition;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,15 +8,18 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace GlossaryBackend.Controllers
 {
     public class AuthController : ApiController
     {
+        IUserBusiness userBusiness = WebApiApplication.GetUserBusiness();
+
         [Route("api/auth/login")]
         [HttpGet]
-        public TokenResponse Login()
+        public async Task<TokenResponse> Login()
         {
             if(Request == null 
                 || Request.Headers == null 
@@ -36,17 +40,19 @@ namespace GlossaryBackend.Controllers
                 throw HttpExceptionHelper.BadRequest;
             }
 
-            string username = decodedString.Substring(0, whitespace);
+            string email = decodedString.Substring(0, whitespace);
 
-            string password = decodedString.Substring(whitespace + 1);
+            string base64Password = decodedString.Substring(whitespace + 1);
 
-            if(username?.ToLower() == "felix" && password == "test test")
+            byte[] password = Convert.FromBase64String(base64Password);
+
+            if (await userBusiness.CheckLoginData(email, password))
             {
                 ClaimsPrincipal principal = new ClaimsPrincipal(new ClaimsIdentity(JwtScopes.Scopes.Select(x => new Claim(ClaimTypes.Role, x))));
 
                 TokenResponse response = new TokenResponse()
                 {
-                    refresh_token = JwtManager.GenerateToken(principal, new TimeSpan(30, 0, 0, 0)),
+                    // refresh_token = JwtManager.GenerateToken(principal, new TimeSpan(30, 0, 0, 0)),
                     access_token = JwtManager.GenerateToken(principal, new TimeSpan(0, 30, 0))
                 };
 

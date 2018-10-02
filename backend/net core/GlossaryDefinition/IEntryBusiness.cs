@@ -8,7 +8,7 @@ namespace GlossaryDefinition
 {
     public interface IEntryBusiness
     {
-        Task<Page<Entry>> GetEntries(int pageNumber, int pageSize, Func<Entry, bool>[] filters);
+        Task<Page<Entry>> GetEntries(int pageNumber, int pageSize, Func<Entry, bool>[] filters = null);
         Task<bool> SaveEntry(Entry entry);
         Task<Entry> GetEntry(string guid);
         Task<bool> DeleteEntry(string guid);
