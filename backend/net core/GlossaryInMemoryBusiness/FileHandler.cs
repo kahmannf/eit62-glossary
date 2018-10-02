@@ -71,14 +71,14 @@ namespace GlossaryInMemoryBusiness
             });
         }
 
-        private Task InternalDelete(T item)
+        private Task InternalDelete(string guid)
         {
             return Task.Run(() =>
             {
                 lock (threadLock)
                 {
-                    store.Remove(item.Guid);
-                    DeleteFile(item);
+                    store.Remove(guid);
+                    DeleteFile(guid);
                 }
             });
         }
@@ -95,9 +95,9 @@ namespace GlossaryInMemoryBusiness
             }
         }
 
-        private  void DeleteFile(T item)
+        private void DeleteFile(string guid)
         {
-            File.Delete(Path.Combine(directory, item.Guid + ".json"));
+            File.Delete(Path.Combine(directory, guid + ".json"));
         }
 
         public async Task<bool> Save(T item)
@@ -121,6 +121,24 @@ namespace GlossaryInMemoryBusiness
             return true;
         }
 
+        public Task<bool> Delete(string guid)
+        {
+            return Task.Run(() =>
+            {
+                try
+                {
+                    InternalDelete(guid);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    ExceptionHandler.Notify(ex);
+                    return false;
+                }
+
+            });
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             return store.Values.ToList().GetEnumerator();
@@ -142,5 +160,7 @@ namespace GlossaryInMemoryBusiness
                 return default(T);
             }
         }
+
+        public int Count => store.Count;
     }
 }

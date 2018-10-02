@@ -1,6 +1,7 @@
 ﻿using GlossaryDefinition;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace GlossaryInMemoryBusiness
 {
     class UserBusiness : IUserBusiness
     {
-        private FileHandler<User> _fileHandler = new FileHandler<User>(Config.GetInstance().DataDirectory ?? throw new MissingConfigException("DataDirectory"));
+        private FileHandler<User> _fileHandler = new FileHandler<User>(Path.Combine(Config.GetInstance().DataDirectory ?? throw new MissingConfigException("DataDirectory"), "user"));
 
         public async Task<bool> CreateUser(string email, string verifyBaseUrl)
         {
