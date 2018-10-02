@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GlossaryDefinition
 {
-    public class Entry
+    public class Entry : IGuid
     {
         public string Title { get; set; }
         public string Description { get; set; }

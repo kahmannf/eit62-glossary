@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace GlossaryDefinition
 {
-    public class User
+    public class User : IGuid
     {
         public string Guid { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
-        public string Hash { get; set; }
-        public string Salt { get; set; }
+        public byte[] Hash { get; set; }
+        public byte[] Salt { get; set; }
         public string VerificationKey { get; set; }
         public IEnumerable<string> Roles { get; set; }
     }
