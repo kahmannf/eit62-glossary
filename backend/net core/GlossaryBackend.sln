@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlossaryBackend", "GlossaryBackend\GlossaryBackend.csproj", "{790F9D1D-6196-4D48-BCFD-87699C15B8CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlossaryDefinition", "GlossaryDefinition\GlossaryDefinition.csproj", "{48C6505F-963A-4BEC-89C2-729BA3722502}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{790F9D1D-6196-4D48-BCFD-87699C15B8CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{790F9D1D-6196-4D48-BCFD-87699C15B8CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{790F9D1D-6196-4D48-BCFD-87699C15B8CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48C6505F-963A-4BEC-89C2-729BA3722502}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48C6505F-963A-4BEC-89C2-729BA3722502}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48C6505F-963A-4BEC-89C2-729BA3722502}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48C6505F-963A-4BEC-89C2-729BA3722502}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
