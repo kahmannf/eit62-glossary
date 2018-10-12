@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace GlossaryBackend
 {
@@ -10,6 +11,10 @@ namespace GlossaryBackend
         public static void Register(HttpConfiguration config)
         {
             // Web-API-Konfiguration und -Dienste
+#if DEBUG
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
+#endif
 
             // Web-API-Routen
             config.MapHttpAttributeRoutes();

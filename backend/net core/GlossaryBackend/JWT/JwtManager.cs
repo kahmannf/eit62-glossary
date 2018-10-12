@@ -35,13 +35,36 @@ namespace GlossaryBackend.JWT
         //string temp = Convert.ToBase64String(bla.Key);
         private const string SECRET = "TkluQ3hTak9OQ3BsWlRqTjFhamZ6ckRaWnU1RFFXcGlzZGZnc2RmZ3NkbGZnKCk2YsOfOTgvJkJGSkZKWlQ1dDZyNjdpYlImL09SVms3dGwoVC9ST0xQJSQ4bzZhc2Q1NnM0ZGdmMzQ1aGYtLiw8cGZnPHJldMO8cjBhbmVyZ2RmaGtsLsO2bmU0N3R2N3PDtmVyOHpzZ2huZmQuZ3NlNTh6dG5ic2Vyw7ZwdGw5djgzNHpucDM4NDZ6bmIgIHEyMzRww7bDtnR6OGVybmhzZ2R1ZnNnbGVyOHo1dHEzNMO2bHJlczhnaGrDtnNmOG9sdXp3ZcO2cjhvaWZn";
 
-        private static readonly SymmetricSecurityKey SecurityKey = new SymmetricSecurityKey(Convert.FromBase64String(SECRET));
+        private const string REFRESH_SECRET = "jBgtzoXn8JXEixkpdLuL8sU7NHDN/i7AHyysyKtHZI8UpxBxxozq0WMjF646l+KjzFh2KrFvllB7a6xb9yohQLtMKCKk8HBTBl6+YKlkpqmcYHdvnuLKSjBZvA4FPud9L0/Ejg9b0+lKWLenGwGaiWKV7VsihlJZtWQ8tjwtQA4iuH/UACBHfyc4jqDdIf2kmmTBkInWofTSC/8djKoFpCuN7GYJWzcXIHgLxFdoARxCCjPQl8ecQ5xrh9LNBXAom63vXT7/lj29NsNygIMOdHTnGcppEKdtxeE+KFzxlbf2h9PYNjOIhKDbrd+y/OrihN0JpXvGdoH69pwMBsGZYw";
 
-        public static string GenerateToken(ClaimsPrincipal principal, TimeSpan expiresIn)
+        private static readonly SymmetricSecurityKey AccessSecurityKey = new SymmetricSecurityKey(Convert.FromBase64String(SECRET));
+        private static readonly SymmetricSecurityKey RefreshSecurityKey = new SymmetricSecurityKey(Convert.FromBase64String(REFRESH_SECRET));
+
+        public static string GenerateAccessToken(ClaimsPrincipal principal, TimeSpan expiresIn)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
 
-            SigningCredentials credentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.HmacSha256Signature);
+            SigningCredentials credentials = new SigningCredentials(AccessSecurityKey, SecurityAlgorithms.HmacSha256Signature);
+
+            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor()
+            {
+                IssuedAt = DateTime.Now,
+                Expires = DateTime.Now.Add(expiresIn),
+                NotBefore = DateTime.Now,
+                Subject = new ClaimsIdentity(principal.Claims),
+                SigningCredentials = credentials
+            };
+
+            JwtSecurityToken token = tokenHandler.CreateJwtSecurityToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
+        }
+
+        public static string GenerateRefreshToken(ClaimsPrincipal principal, TimeSpan expiresIn)
+        {
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+
+            SigningCredentials credentials = new SigningCredentials(RefreshSecurityKey, SecurityAlgorithms.HmacSha256Signature);
 
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor()
             {
@@ -71,7 +94,7 @@ namespace GlossaryBackend.JWT
                 ValidateLifetime = true,
                 ValidateAudience = false,
                 ValidateIssuer = false,
-                IssuerSigningKey = SecurityKey,
+                IssuerSigningKey = AccessSecurityKey,
                 LifetimeValidator = JwtValidators.LifetimeValidator,
 
             },out SecurityToken scToken);

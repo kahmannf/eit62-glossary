@@ -50,10 +50,12 @@ namespace GlossaryBackend.Controllers
             {
                 ClaimsPrincipal principal = new ClaimsPrincipal(new ClaimsIdentity(JwtScopes.Scopes.Select(x => new Claim(ClaimTypes.Role, x))));
 
+                ClaimsPrincipal refreshPrincpal = new ClaimsPrincipal(new ClaimsIdentity(new[] { new Claim("email", email) }));
+
                 TokenResponse response = new TokenResponse()
                 {
-                    // refresh_token = JwtManager.GenerateToken(principal, new TimeSpan(30, 0, 0, 0)),
-                    access_token = JwtManager.GenerateToken(principal, new TimeSpan(0, 30, 0))
+                    refresh_token = JwtManager.GenerateRefreshToken(principal, new TimeSpan(30, 0, 0, 0)),
+                    access_token = JwtManager.GenerateAccessToken(refreshPrincpal, new TimeSpan(0, 30, 0))
                 };
 
                 return response;
