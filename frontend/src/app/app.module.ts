@@ -9,6 +9,7 @@ import { EntryComponent } from './entry/entry.component';
 import { EntryListComponent } from './entry-list/entry-list.component';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddEntryComponent } from './add-entry/add-entry.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +17,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     NavbarComponent,
     EntryComponent,
     EntryListComponent,
-    RegisterComponent
+    RegisterComponent,
+    AddEntryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

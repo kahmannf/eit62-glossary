@@ -54,8 +54,8 @@ namespace GlossaryBackend.Controllers
 
                 TokenResponse response = new TokenResponse()
                 {
-                    refresh_token = JwtManager.GenerateRefreshToken(principal, new TimeSpan(30, 0, 0, 0)),
-                    access_token = JwtManager.GenerateAccessToken(refreshPrincpal, new TimeSpan(0, 30, 0))
+                    refresh_token = JwtManager.GenerateRefreshToken(refreshPrincpal, new TimeSpan(30, 0, 0, 0)),
+                    access_token = JwtManager.GenerateAccessToken(principal, new TimeSpan(0, 30, 0))
                 };
 
                 return response;

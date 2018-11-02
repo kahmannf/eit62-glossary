@@ -18,6 +18,8 @@ namespace GlossaryInMemoryBusiness
 
         private readonly string directory;
 
+        public int CachedItemCount => this.store.Count;
+
         public FileHandler(string directory)
         {
             this.directory = directory;

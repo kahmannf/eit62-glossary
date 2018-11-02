@@ -17,13 +17,13 @@ namespace GlossaryInMemoryBusiness
             return _filehandler.Delete(guid);
         }
 
-        public Task<Page<Entry>> GetEntries(int pageNumber, int pageSize, Func<Entry, bool>[] filters)
+        public Task<Page<Entry>> GetEntries(int index, int size, Func<Entry, bool>[] filters)
         {
 
             Page<Entry> result = new Page<Entry>
             {
-                PageNumber = pageNumber,
-                PageSize = pageSize
+                Index = index,
+                Size = size
             };
 
             try
@@ -42,7 +42,7 @@ namespace GlossaryInMemoryBusiness
                     }
                 }
 
-                result.Items = _filehandler.Where(x => filter(x)).Skip(pageNumber * pageSize).Take(pageSize).ToArray();
+                result.Items = _filehandler.Where(x => filter(x)).Skip(index * size).Take(size).ToArray();
             }
             catch (Exception ex)
             {

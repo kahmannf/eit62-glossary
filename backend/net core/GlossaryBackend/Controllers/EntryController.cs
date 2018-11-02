@@ -13,11 +13,11 @@ namespace GlossaryBackend.Controllers
     {
         readonly IEntryBusiness business = WebApiApplication.GetEntryBusiness();
 
-        [Route("api/entry/all")]
+        [Route("api/entries")]
         [HttpGet]
-        public Task<Page<Entry>> GetEntries([FromUri]int pageNumber = 0, [FromUri]int pageSize = 20)
+        public Task<Page<Entry>> GetEntries([FromUri]int index = 0, [FromUri]int maxSize = 20, [FromUri]string search = null)
         {
-            return business.GetEntries(pageNumber, pageSize);
+            return business.GetEntries(index, maxSize);
         }
     }
 }

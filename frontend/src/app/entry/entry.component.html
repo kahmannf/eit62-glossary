@@ -1,3 +1,9 @@
-<p>
-  entry works!
-</p>
+<div class="card" [id]="entry.Guid">
+    <div class="card-body">
+      <h5 class="card-title">{{entry.Title}}</h5>
+      <p class="card-text">{{entry.Description}}</p>
+      <ng-container *ngFor="let link of entry.References">
+        <a [href]="'#' + link.Guid">{{link.Title}}</a>
+      </ng-container>
+    </div>
+  </div>
