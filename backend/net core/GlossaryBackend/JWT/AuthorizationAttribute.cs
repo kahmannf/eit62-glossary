@@ -20,7 +20,7 @@ namespace GlossaryBackend.JWT
         readonly string[] scopes;
 
         // This is a positional argument
-        public JwtAuthorizationAttribute(string[] scopes)
+        public JwtAuthorizationAttribute(params string[] scopes)
         {
             if (scopes == null)
                 scopes = new string[0];

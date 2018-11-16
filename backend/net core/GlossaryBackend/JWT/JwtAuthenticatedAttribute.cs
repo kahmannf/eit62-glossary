@@ -15,7 +15,7 @@ namespace GlossaryBackend.JWT
     {
         readonly string[] requiredScopes;
         
-        public JwtAuthenticatedAttribute(string[] requiredScopes = null)
+        public JwtAuthenticatedAttribute(params string[] requiredScopes)
         {
             if(requiredScopes == null)
             {
