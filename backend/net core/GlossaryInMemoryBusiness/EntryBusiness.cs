@@ -43,6 +43,7 @@ namespace GlossaryInMemoryBusiness
                 }
 
                 result.Items = _filehandler.Where(x => filter(x)).Skip(index * size).Take(size).ToArray();
+                result.Total = _filehandler.Count;
             }
             catch (Exception ex)
             {

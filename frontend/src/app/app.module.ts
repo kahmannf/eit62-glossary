@@ -10,6 +10,7 @@ import { EntryListComponent } from './entry-list/entry-list.component';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddEntryComponent } from './add-entry/add-entry.component';
+import { PageNavigatorComponent } from './page-navigator/page-navigator.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AddEntryComponent } from './add-entry/add-entry.component';
     EntryComponent,
     EntryListComponent,
     RegisterComponent,
-    AddEntryComponent
+    AddEntryComponent,
+    PageNavigatorComponent
   ],
   imports: [
     BrowserModule,

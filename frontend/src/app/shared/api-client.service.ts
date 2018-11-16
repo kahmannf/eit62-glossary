@@ -29,4 +29,11 @@ export class ApiClientService {
       (search ? '&search=' + encodeURI(search) : '')
     );
   }
+
+  addEntry(entry: Entry): Observable<any> {
+    return this.http.post(
+      this.API_URL + 'api/entries',
+      entry
+    );
+  }
 }

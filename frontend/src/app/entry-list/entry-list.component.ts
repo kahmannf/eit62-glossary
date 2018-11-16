@@ -1,6 +1,9 @@
 import { Entry } from './../shared/definition/entry';
 import { Observable, of } from 'rxjs';
 import { Component, OnInit, Input } from '@angular/core';
+import { ApiClientService } from '../shared/api-client.service';
+import { Page } from '../shared/definition/page';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'gls-entry-list',
@@ -10,55 +13,25 @@ import { Component, OnInit, Input } from '@angular/core';
 export class EntryListComponent implements OnInit {
 
   @Input()
-  entries$: Observable<Entry[]>;
+  entryPage$: Observable<Page<Entry>>;
 
-  constructor() { }
+  constructor(
+    private api: ApiClientService
+  ) { }
 
   ngOnInit() {
+    this.refresh();
+  }
 
-    const entries: Entry[] = [
-      {
-        Title: 'Rekursion',
-        Description: 'Siehe Rekursion',
-        Guid: '1234',
-        References: [
-          {
-            Title: 'Rekursion',
-            Guid: '1234'
-          }
-        ]
-      },
-    ];
+  refresh() {
+    this.entryPage$ = this.api.getEntries(0, 3);
+  }
 
-    for (let i = 0; i < 10; i++) {
+  nextPage() {
+    this.entryPage$ = this.
+  }
 
-      entries.push(
-        {
-          Title: 'Entry ' + i,
-          Description: 'Test bestreibung wjeöofiash awüe8zhföasd iuwegsldf §GD LAUIWEFAWL EG/RGFEWF ' +
-          '  ugaIGIDILDGFCSDHV ÖE  LEGWFLAGWGEF   UGEWoeöstgh  aowoguf sadf',
-          Guid: 'entry' + i,
-          References: [
-          ]
-        });
-
-    }
-
-    entries.push(
-      {
-        Title: 'Blaaa',
-        Description: 'Test bestreibung',
-        Guid: '4321',
-        References: [
-          {
-            Title: 'Rekursion',
-            Guid: '1234'
-          }
-        ]
-      });
-
-
-    this.entries$ = of(entries);
+  previousPage() {
 
   }
 

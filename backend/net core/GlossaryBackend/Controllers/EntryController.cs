@@ -19,5 +19,12 @@ namespace GlossaryBackend.Controllers
         {
             return business.GetEntries(index, maxSize);
         }
+
+        [Route("api/entries")]
+        [HttpPost]
+        public void AddEntry([FromBody]Entry entry)
+        {
+            business.SaveEntry(entry);
+        }
     }
 }

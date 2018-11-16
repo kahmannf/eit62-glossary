@@ -32,6 +32,7 @@ export class AddEntryComponent implements OnInit {
     .valueChanges.pipe(
       switchMap(x => this.api.getEntries(0, 20, x))
     );
+
   }
 
 }

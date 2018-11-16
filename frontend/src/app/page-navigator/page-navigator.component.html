@@ -1,0 +1,7 @@
+<div>
+  <button class="btn btn-outline-primary button-fixed-width" (click)="previous.emit()" [disabled]="!canPreviousPage() || disable" i18n="@@previous" >Previous</button>
+  <button class="btn btn-outline-primary button-fixed-width ml-1" (click)="next.emit()" [disabled]="!canNextPage() || disable" i18n="@@next" >Next</button>
+  <div *ngIf="page" class="text-right mt-1" i18n="@@ResultsOfTotal">
+    Ergebnisse {{ (page.Index * page.Size) + 1 }}  - {{ ((page.Index) * page.Size) + page.Items.length }} von {{ page.Total }}
+  </div>
+</div>
